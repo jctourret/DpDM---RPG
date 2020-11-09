@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
     Equipment[] currentEquipment;
+    InventorySlot[] equipmentSlots;
+    public Transform equipGrid;
 
     public delegate void OnEquipmentChange(Equipment newItem, Equipment oldItem);
     public OnEquipmentChange onEquipmentChangeCallback;
@@ -26,17 +28,18 @@ public class PlayerManager : MonoBehaviour
         inventory = Inventory.instance;
         int equipSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[equipSlots];
+        equipmentSlots = equipGrid.GetComponentsInChildren<InventorySlot>();
     }
 
     public void KillPlayer()
     {
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Equip(Equipment newItem)
     {
         int slotIndex = (int)newItem.equipslot;
+ 
         Equipment oldItem = null;
         if(currentEquipment[slotIndex] != null)
         {
@@ -50,6 +53,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         currentEquipment[slotIndex] = newItem;
+        equipmentSlots[slotIndex].AddItem(newItem);
     }
     public void Unequip(int slotIndex)
     {
@@ -64,6 +68,7 @@ public class PlayerManager : MonoBehaviour
             }
 
             currentEquipment[slotIndex] = null;
+            equipmentSlots[slotIndex].ClearSlot();
         }
     }
 }

@@ -21,7 +21,8 @@ public class EnemyAI : Interactable
     public float walkPointInterval = 1.5f;
     public float walkPointCooldown = 0;
 
-    public float sightRange, attackRange;
+    public float sightRange = 5;
+    public float attackRange = 2.5f;
     bool playerInSightRange, playerInAttackRange;
 
     private void Start()
@@ -33,9 +34,6 @@ public class EnemyAI : Interactable
         agent = GetComponent<NavMeshAgent>();
         WhatIsGround = LayerMask.GetMask("Ground");
         WhatIsPlayer = LayerMask.GetMask("Player");
-        walkPointRange = 5;
-        sightRange = 5;
-        attackRange = 2;
     }
     private void Update()
     {

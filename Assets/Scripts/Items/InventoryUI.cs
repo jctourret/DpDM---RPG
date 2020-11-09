@@ -4,14 +4,16 @@ public class InventoryUI : MonoBehaviour
 {
     public GameObject inventoryUI;
     public Transform grid;
-    Inventory inventory;
 
+    Inventory inventory;
     InventorySlot[] slots;
+
     void Start()
     {
         inventory = Inventory.instance;
         inventory.onInventoryChangeCallback += updateUI;
         slots = grid.GetComponentsInChildren<InventorySlot>();
+        
     }
     void updateUI()
     {

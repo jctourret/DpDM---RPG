@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class DepositMining : Interactable
 {
-    public Rigidbody mineral;
+    public GameObject mineral;
     CharacterStats playerStats;
     int DepositContent = 100;
-    float lootForce = 5f;
-    int minDrop = 1;
-    int maxDrop = 2;
     private void Start()
     {
         playerStats = PlayerManager.instance.player.GetComponent<CharacterStats>();
@@ -22,13 +19,7 @@ public class DepositMining : Interactable
         }
         else
         {
-            int random = Random.Range(minDrop,maxDrop);
-            Rigidbody mineralIns;
-            for (int i = 0; i == random; i++)
-            {
-                mineralIns = Instantiate(mineral,gameObject.transform.position,gameObject.transform.rotation) as Rigidbody;
-                mineralIns.AddForce(gameObject.transform.up * lootForce);
-            }
+            Instantiate(mineral, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
