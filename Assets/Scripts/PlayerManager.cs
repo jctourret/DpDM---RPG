@@ -5,16 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
-    #region Singleton
     public static PlayerManager instance;
-    private void Awake()
-    {
-        instance = this;
-    }
-    #endregion
     Equipment[] currentEquipment;
     InventorySlot[] equipmentSlots;
     public Transform equipGrid;
+    string currentScene;
 
     public delegate void OnEquipmentChange(Equipment newItem, Equipment oldItem);
     public OnEquipmentChange onEquipmentChangeCallback;
@@ -23,14 +18,33 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject player;
 
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
     private void Start()
     {
+        currentScene = SceneManager.GetActiveScene().name;
         inventory = Inventory.instance;
         int equipSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[equipSlots];
         equipmentSlots = equipGrid.GetComponentsInChildren<InventorySlot>();
+        DontDestroyOnLoad(gameObject);
     }
+    public void Update()
+    {
+        if (currentScene != SceneManager.GetActiveScene().name)
+        {
+            player.GetComponent<PlayerController>().findControllers();
 
+            currentScene = SceneManager.GetActiveScene().name;
+        }
+    }
     public void KillPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

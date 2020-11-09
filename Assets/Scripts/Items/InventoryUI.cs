@@ -2,6 +2,7 @@
 
 public class InventoryUI : MonoBehaviour
 {
+    public static InventoryUI instance;
     public GameObject inventoryUI;
     public Transform grid;
 
@@ -10,10 +11,16 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         inventory = Inventory.instance;
         inventory.onInventoryChangeCallback += updateUI;
         slots = grid.GetComponentsInChildren<InventorySlot>();
-        
+        DontDestroyOnLoad(gameObject);
     }
     void updateUI()
     {

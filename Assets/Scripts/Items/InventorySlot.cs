@@ -9,6 +9,7 @@ public class InventorySlot : MonoBehaviour
     {
         currentItem = newItem;
         icon.sprite = currentItem.icon;
+        Debug.Log("Should activate icon");
         icon.enabled = true;
         removeButton.interactable = true;
     }

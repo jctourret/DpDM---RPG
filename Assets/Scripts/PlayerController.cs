@@ -3,18 +3,34 @@ using UnityEngine.Experimental.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     public Joystick joystick;
     public Joybutton joybutton;
     public Rigidbody rb;
     Interactable interObj;
+    string currentScene;
     bool interacting;
     public float runningSpeed = 5f;
     public float interactionRadius = 2f;
+
     private void Start()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        findControllers();
+        rb = GetComponent<Rigidbody>();
+        DontDestroyOnLoad(gameObject);
+    }
+    public void findControllers()
+    {
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("Spawn");
+        transform.position = spawnPoint.transform.position;
         joystick = FindObjectOfType<Joystick>();
         joybutton = FindObjectOfType<Joybutton>();
-        rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
