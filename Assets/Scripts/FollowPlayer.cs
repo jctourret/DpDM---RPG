@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
+    public static FollowPlayer instance;
     Transform player;
     public float xOffSet;
     public float yOffSet;
@@ -11,7 +12,14 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         player = PlayerController.instance.transform;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
