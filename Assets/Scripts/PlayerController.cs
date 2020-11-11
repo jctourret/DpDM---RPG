@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Joystick joystick;
     public Joybutton joybutton;
     public Rigidbody rb;
+    public Animator playerAnim;
     Interactable interObj;
     string currentScene;
     bool interacting;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
         }
         instance = this;
         findControllers();
+        playerAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         DontDestroyOnLoad(gameObject);
     }
@@ -34,7 +36,23 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        rb.velocity = new Vector3(joystick.Horizontal*runningSpeed,rb.velocity.y,joystick.Vertical*runningSpeed);
+        rb.velocity = new Vector3(joystick.Horizontal * runningSpeed, rb.velocity.y, joystick.Vertical * runningSpeed);
+        if (joystick.Horizontal != 0 || joystick.Vertical != 0)
+        {
+            if (joystick.Vertical > 0)
+            {
+                playerAnim.SetBool("walkingForward", true);
+            }
+            else
+            {
+                playerAnim.SetBool("walkingBackward", true);
+            }
+        }
+        else
+        {
+            playerAnim.SetBool("walkingForward", false);
+            playerAnim.SetBool("walkingBackward", false);
+        }
         if (joybutton.pressed)
         {
             if (!interacting)

@@ -57,6 +57,8 @@ public class EnemyAI : Interactable
     public override void Interact()
     {
         base.Interact();
+        Animator playerAnim = playerManager.player.GetComponent<Animator>();
+        playerAnim.SetTrigger("attack");
         CharacterCombat playerCombat = playerManager.player.GetComponent<CharacterCombat>();
         if(playerCombat != null)
         {
