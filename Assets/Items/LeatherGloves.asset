@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0051a002f40daa0449d07c39b5d8aa7c, type: 3}
   m_Name: LeatherGloves
   m_EditorClassIdentifier: 
-  name: Item Name
-  icon: {fileID: 0}
+  name: Leather Gloves
+  icon: {fileID: 21300000, guid: d4f5634edede200468fc1ccf30e6f3a1, type: 3}
   defaultItem: 0
-  equipslot: 0
-  armorMod: 0
+  isInShop: 0
+  itemValue: 25
+  equipslot: 5
+  armorMod: 2
   damageMod: 0
   miningMod: 0

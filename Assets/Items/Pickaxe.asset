@@ -15,7 +15,9 @@ MonoBehaviour:
   name: Pickaxe
   icon: {fileID: 21300000, guid: 0138ff996cf7410479c3dfffa5472ee1, type: 3}
   defaultItem: 0
+  isInShop: 0
+  itemValue: 50
   equipslot: 3
   armorMod: 0
   damageMod: 0
-  miningMod: 0
+  miningMod: 10

@@ -11,9 +11,29 @@ public class Equipment : Item
     public int miningMod;
     public override void Use()
     {
-        base.Use();
-        PlayerManager.instance.Equip(this);
-        RemoveFromInventory();
+        if (!isInShop)
+        {
+            PlayerManager.instance.Equip(this);
+            RemoveFromInventory();
+        }
+        else
+        {
+            PlayerManager.instance.gold += itemValue;
+            Debug.Log("Should remove.");
+            PlayerManager.instance.onGoldChangeCallback.Invoke();
+            RemoveFromInventory();
+        }
+    }
+    public override bool Buy()
+    {
+        if(PlayerManager.instance.gold >= itemValue)
+        {
+            PlayerManager.instance.gold -= itemValue;
+            PlayerManager.instance.onGoldChangeCallback.Invoke();
+            Inventory.instance.AddToInv(this);
+            return true;
+        }
+        return false;
     }
 }
-public enum EquipmentSlot { Head, Chest, Leg, Tool, Weapon, Shield, Feet}
+public enum EquipmentSlot { Head, Chest, Leg, Tool, Weapon, Hands, Feet}

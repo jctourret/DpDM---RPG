@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0051a002f40daa0449d07c39b5d8aa7c, type: 3}
   m_Name: LeatherBoots
   m_EditorClassIdentifier: 
-  name: Item Name
-  icon: {fileID: 21300000, guid: e128b01dab70e7a498a78577123c2db0, type: 3}
+  name: Leather Boots
+  icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
   defaultItem: 0
+  isInShop: 0
+  itemValue: 50
   equipslot: 6
   armorMod: 2
   damageMod: 0

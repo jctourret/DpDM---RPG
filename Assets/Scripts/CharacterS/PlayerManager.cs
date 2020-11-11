@@ -13,10 +13,13 @@ public class PlayerManager : MonoBehaviour
 
     public delegate void OnEquipmentChange(Equipment newItem, Equipment oldItem);
     public OnEquipmentChange onEquipmentChangeCallback;
+    public delegate void OnGoldChange();
+    public OnGoldChange onGoldChangeCallback;
 
     Inventory inventory;
 
     public GameObject player;
+    public float gold;
 
     private void Awake()
     {

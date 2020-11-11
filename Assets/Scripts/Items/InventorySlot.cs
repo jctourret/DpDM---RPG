@@ -13,7 +13,6 @@ public class InventorySlot : MonoBehaviour
         icon.enabled = true;
         removeButton.interactable = true;
     }
-
     public void ClearSlot() {
         currentItem = null;
         icon.sprite = null;

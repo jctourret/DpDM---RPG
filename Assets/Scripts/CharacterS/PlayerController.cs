@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnim;
     Interactable interObj;
     string currentScene;
-    bool interacting;
+    public bool interacting;
     public float runningSpeed = 5f;
     public float interactionRadius = 2f;
 
