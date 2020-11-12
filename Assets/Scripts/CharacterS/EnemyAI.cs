@@ -22,7 +22,7 @@ public class EnemyAI : Interactable
     public float walkPointCooldown = 0;
 
     public float sightRange = 5;
-    public float attackRange = 2.5f;
+    public float attackRange = 2f;
     bool playerInSightRange, playerInAttackRange;
 
     private void Start()
@@ -30,7 +30,7 @@ public class EnemyAI : Interactable
         playerManager = PlayerManager.instance;
         myStats = GetComponent<CharacterStats>();
         combat = GetComponent<CharacterCombat>();
-        playerPos = PlayerManager.instance.player.transform;
+        playerPos = PlayerManager.instance.transform;
         agent = GetComponent<NavMeshAgent>();
         WhatIsGround = LayerMask.GetMask("Ground");
         WhatIsPlayer = LayerMask.GetMask("Player");
@@ -57,9 +57,9 @@ public class EnemyAI : Interactable
     public override void Interact()
     {
         base.Interact();
-        Animator playerAnim = playerManager.player.GetComponent<Animator>();
+        Animator playerAnim = PlayerController.instance.GetComponent<Animator>();
         playerAnim.SetTrigger("attack");
-        CharacterCombat playerCombat = playerManager.player.GetComponent<CharacterCombat>();
+        CharacterCombat playerCombat = PlayerController.instance.GetComponent<CharacterCombat>();
         if(playerCombat != null)
         {
             playerCombat.Attack(myStats);
@@ -105,7 +105,7 @@ public class EnemyAI : Interactable
     {
         agent.SetDestination(transform.position);
         FacePlayer();
-        CharacterStats targetStats = playerManager.player.GetComponent<CharacterStats>();
+        CharacterStats targetStats = PlayerController.instance.GetComponent<CharacterStats>();
         combat.Attack(targetStats);
     }
     private void FacePlayer()

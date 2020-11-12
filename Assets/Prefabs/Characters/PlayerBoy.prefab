@@ -1172,10 +1172,10 @@ Animator:
   m_GameObject: {fileID: 8118767458644152606}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d8d466c9685c1f247aa2950863f3b1e8, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a8555c0cff30527479e32562cef9141f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1223,6 +1223,8 @@ MonoBehaviour:
   joystick: {fileID: 0}
   joybutton: {fileID: 0}
   rb: {fileID: 0}
+  playerAnim: {fileID: 0}
+  interacting: 0
   runningSpeed: 5
   interactionRadius: 2
 --- !u!114 &8118767458644152607
@@ -1238,6 +1240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   maxStamina: 100
   armor:
     baseValue: 0

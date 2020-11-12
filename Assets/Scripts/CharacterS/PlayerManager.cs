@@ -43,14 +43,15 @@ public class PlayerManager : MonoBehaviour
     {
         if (currentScene != SceneManager.GetActiveScene().name)
         {
-            player.GetComponent<PlayerController>().findControllers();
+            PlayerController.instance.findControllers();
 
             currentScene = SceneManager.GetActiveScene().name;
         }
     }
     public void KillPlayer()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Town");
+        
     }
 
     public void Equip(Equipment newItem)
@@ -68,7 +69,7 @@ public class PlayerManager : MonoBehaviour
         {
             onEquipmentChangeCallback.Invoke(newItem, oldItem);
         }
-
+        
         currentEquipment[slotIndex] = newItem;
         equipmentSlots[slotIndex].AddItem(newItem);
     }

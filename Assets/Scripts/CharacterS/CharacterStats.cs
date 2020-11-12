@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth { get; private set;}
+    public int currentHealth;
     public int maxStamina = 100;
     public Stat armor;
     public Stat damage;

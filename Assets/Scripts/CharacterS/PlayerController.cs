@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     string currentScene;
     public bool interacting;
     public float runningSpeed = 5f;
-    public float interactionRadius = 2f;
+    public float interactionRadius = 2.2f;
 
     private void Start()
     {

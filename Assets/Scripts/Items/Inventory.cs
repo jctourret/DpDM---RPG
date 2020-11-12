@@ -43,6 +43,7 @@ public class Inventory : MonoBehaviour
     public void RemoveFromInv(Item item)
     {
         inventory.Remove(item);
+        Instantiate(item,PlayerController.instance.transform);
         if (onInventoryChangeCallback != null)
         {
             onInventoryChangeCallback.Invoke();

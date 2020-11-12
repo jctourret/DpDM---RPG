@@ -5,16 +5,16 @@ using UnityEngine;
 public class DepositMining : Interactable
 {
     public GameObject mineral;
-    CharacterStats playerStats;
+    PlayerStats playerStats;
     int DepositContent = 100;
     private void Start()
     {
-        playerStats = PlayerManager.instance.player.GetComponent<CharacterStats>();
+        playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
     }
     public override void Interact()
     {
         base.Interact();
-        if(DepositContent > 0) {
+        if(DepositContent > 0){
             MineDeposit();
         }
         else

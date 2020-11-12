@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShopKeeper : Interactable
 {
     public ShopUI shopUI;
+    int maxShopRange=3;
     Inventory playerInv;
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,7 @@ public class ShopKeeper : Interactable
     }
     private void Update()
     {
-        if (PlayerController.instance.interacting && Vector3.Distance(gameObject.transform.position, PlayerController.instance.transform.position) > 10) {
+        if (Vector3.Distance(gameObject.transform.position, PlayerController.instance.transform.position) > maxShopRange) {
             if (shopUI.shopUI.activeInHierarchy)
             {
                 shopUI.shopUI.SetActive(!shopUI.shopUI.activeSelf);
