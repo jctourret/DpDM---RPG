@@ -9,17 +9,21 @@ public class PlayerManager : MonoBehaviour
     Equipment[] currentEquipment;
     InventorySlot[] equipmentSlots;
     public Transform equipGrid;
-    string currentScene;
+    public string currentScene;
 
     public delegate void OnEquipmentChange(Equipment newItem, Equipment oldItem);
     public OnEquipmentChange onEquipmentChangeCallback;
     public delegate void OnGoldChange();
     public OnGoldChange onGoldChangeCallback;
+    public delegate void OnDayChange();
+    public OnDayChange onDayChangeCallback;
 
     Inventory inventory;
 
     public GameObject player;
+    public ShowCurrentDay dayPanel;
     public float gold;
+    public int currentDay;
 
     private void Awake()
     {
@@ -44,14 +48,18 @@ public class PlayerManager : MonoBehaviour
         if (currentScene != SceneManager.GetActiveScene().name)
         {
             PlayerController.instance.findControllers();
-
             currentScene = SceneManager.GetActiveScene().name;
+            if (currentScene == "Town")
+            {
+                currentDay += 1;
+                dayPanel.ShowDay();
+            };
         }
     }
     public void KillPlayer()
     {
         SceneManager.LoadScene("Town");
-        
+        currentDay += 1;
     }
 
     public void Equip(Equipment newItem)

@@ -19,6 +19,14 @@ public class ShopKeeper : Interactable
             if (shopUI.shopUI.activeInHierarchy)
             {
                 shopUI.shopUI.SetActive(!shopUI.shopUI.activeSelf);
+                foreach (Item element in playerInv.inventory)
+                {
+                    element.isInShop = !element.isInShop;
+                }
+#if UNITY_STANDALONE || UNITY_EDITOR
+                Cursor.lockState = CursorLockMode.Confined;
+                PlayerController.instance.isInShop = false;
+#endif
             }
         };
     }
@@ -31,5 +39,9 @@ public class ShopKeeper : Interactable
         }
         shopUI.updateUI();
         shopUI.shopUI.SetActive(!shopUI.shopUI.activeSelf);
+#if UNITY_STANDALONE || UNITY_EDITOR
+        Cursor.lockState = CursorLockMode.None;
+        PlayerController.instance.isInShop = true;
+#endif
     }
 }

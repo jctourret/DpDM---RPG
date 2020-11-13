@@ -13,8 +13,6 @@ public class ShowGold : MonoBehaviour
         pm = PlayerManager.instance;
         pm.onGoldChangeCallback += updateGold;
     }
-
-    
     public void updateGold()
     {
         gold.text = pm.gold.ToString();

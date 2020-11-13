@@ -24,10 +24,7 @@ public class ShopSlot : MonoBehaviour
     {
         if (currentItem != null)
         {
-            if (currentItem.Buy())
-            {
-                ShopInv.instance.RemoveFromShop(currentItem);
-            }
+            currentItem.Buy();
         }
     }
 }

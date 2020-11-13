@@ -20,7 +20,10 @@ public class ShopUI : MonoBehaviour
         }
         instance = this;
         shopInv = ShopInv.instance;
-        shopInv.onShopChangeCallback += updateUI;
+        if (shopInv != null)
+        {
+            shopInv.onShopChangeCallback += updateUI;
+        }
         slots = grid.GetComponentsInChildren<ShopSlot>();
         DontDestroyOnLoad(gameObject);
     }
