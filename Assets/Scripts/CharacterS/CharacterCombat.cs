@@ -26,6 +26,8 @@ public class CharacterCombat : MonoBehaviour
     {
         if (attackCooldown < 0.0f)
         {
+            AudioManager.instance.Play("Attack");
+            if (target.gameObject.tag=="Player") { AudioManager.instance.Play("Attack"); }
             target.TakeDamage(myStats.damage.getValue());
             attackCooldown = 1/myStats.attackSpeed.getValue(); 
         }

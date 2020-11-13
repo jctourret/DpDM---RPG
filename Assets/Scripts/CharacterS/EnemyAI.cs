@@ -8,6 +8,7 @@ public class EnemyAI : Interactable
     PlayerManager playerManager;
     CharacterStats myStats;
     CharacterCombat combat;
+    Animator enemyAnim;
 
     public NavMeshAgent agent;
     public Transform playerPos;
@@ -24,12 +25,14 @@ public class EnemyAI : Interactable
     public float sightRange = 5;
     public float attackRange = 2f;
     bool playerInSightRange, playerInAttackRange;
+    bool spottedPlayer = false;
 
     private void Start()
     {
         playerManager = PlayerManager.instance;
         myStats = GetComponent<CharacterStats>();
         combat = GetComponent<CharacterCombat>();
+        enemyAnim = GetComponent<Animator>();
         playerPos = PlayerManager.instance.transform;
         agent = GetComponent<NavMeshAgent>();
         WhatIsGround = LayerMask.GetMask("Ground");
@@ -67,8 +70,10 @@ public class EnemyAI : Interactable
     }
     private void Patrolling()
     {
+        enemyAnim.SetBool("walking",true);
         if (walkPointCooldown < 0)
         {
+            enemyAnim.SetBool("walking", true);
             if (!walkPointSet)
             {
                 SearchForWalkPoint();
@@ -84,6 +89,10 @@ public class EnemyAI : Interactable
             }
             walkPointCooldown = walkPointInterval;
         }
+        else
+        {
+            enemyAnim.SetBool("walking", false);
+        }
     }
     private void SearchForWalkPoint()
     {
@@ -98,15 +107,22 @@ public class EnemyAI : Interactable
     }
     private void ChasePlayer()
     {
+        if (spottedPlayer)
+        {
+            AudioManager.instance.Play("Breath");
+        }
+        spottedPlayer = true;
+        enemyAnim.SetBool("walking", true);
         agent.SetDestination(playerPos.position);
-
     }
     private void AttackPlayer()
     {
+        enemyAnim.SetBool("walking", false);
         agent.SetDestination(transform.position);
         FacePlayer();
         CharacterStats targetStats = PlayerController.instance.GetComponent<CharacterStats>();
         combat.Attack(targetStats);
+        enemyAnim.SetBool("attack", true);
     }
     private void FacePlayer()
     {

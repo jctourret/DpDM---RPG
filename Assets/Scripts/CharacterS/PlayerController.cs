@@ -34,7 +34,10 @@ public class PlayerController : MonoBehaviour
     public void findControllers()
     {
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("Spawn");
-        transform.position = spawnPoint.transform.position;
+        if (spawnPoint != null)
+        {
+            transform.position = spawnPoint.transform.position;
+        }
 //#if UNITY_ANDROID
         joystick = FindObjectOfType<Joystick>();
         joybutton = FindObjectOfType<Joybutton>();

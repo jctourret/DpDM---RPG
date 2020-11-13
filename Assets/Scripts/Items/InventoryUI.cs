@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
         slots = grid.GetComponentsInChildren<InventorySlot>();
         DontDestroyOnLoad(gameObject);
     }
-    void updateUI()
+    public void updateUI()
     {
         for(int i = 0; i < slots.Length; i++)
         {

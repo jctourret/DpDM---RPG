@@ -20,18 +20,19 @@ public class Inventory : MonoBehaviour
     {
         if (item != null)
         {
+            Debug.Log("Item no es nulo");
             if (!item.defaultItem)
             {
+                Debug.Log("Item no es default");
                 if (inventory.Count > space)
                 {
                     Debug.Log("Inventory Full");
                     return false;
                 }
+                Debug.Log("Agregar Item");
                 inventory.Add(item);
-                if (onInventoryChangeCallback != null)
-                {
-                    onInventoryChangeCallback.Invoke();
-                }
+                Debug.Log("UpdateUI");
+                InventoryUI.instance.updateUI();
             }
             return true;
         }
@@ -42,6 +43,7 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveFromInv(Item item)
     {
+        Debug.Log("Item is being removed");
         inventory.Remove(item);
         Instantiate(item,PlayerController.instance.transform);
         if (onInventoryChangeCallback != null)

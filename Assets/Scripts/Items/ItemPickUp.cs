@@ -12,7 +12,7 @@ public class ItemPickUp : Interactable
     }
     void PickUp()
     {
-        if (Inventory.instance.AddToInv(item))
+        if (Inventory.instance.AddToInv(item)) 
         {
             Destroy(gameObject);
             item = null;
