@@ -20,7 +20,7 @@ public class Equipment : Item
         {
             PlayerManager.instance.gold += itemValue;
             Debug.Log("Should remove.");
-            PlayerManager.instance.onGoldChangeCallback.Invoke();
+            PlayerManager.instance.showGold.updateGold();
             RemoveFromInventory();
         }
     }
@@ -29,7 +29,7 @@ public class Equipment : Item
         if(PlayerManager.instance.gold >= itemValue)
         {
             PlayerManager.instance.gold -= itemValue;
-            PlayerManager.instance.onGoldChangeCallback.Invoke();
+            PlayerManager.instance.showGold.updateGold();
             Inventory.instance.AddToInv(this);
             return true;
         }

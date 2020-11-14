@@ -89,7 +89,8 @@ public class PlayerController : MonoBehaviour
         }
 #endif
 #if UNITY_ANDROID
-        rb.velocity = new Vector3(joystick.Horizontal * runningSpeed, rb.velocity.y, joystick.Vertical * runningSpeed);
+        transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * runningSpeed);
+        transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * runningSpeed);
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
             if (joystick.Vertical > 0)
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("walkingForward", false);
             playerAnim.SetBool("walkingBackward", false);
         }
-        if (joybutton.pressed || Input.GetMouseButtonDown(0))
+        if (joybutton.pressed)
         {
             if (!interacting)
             {

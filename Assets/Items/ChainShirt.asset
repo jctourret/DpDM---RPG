@@ -18,6 +18,6 @@ MonoBehaviour:
   isInShop: 0
   itemValue: 100
   equipslot: 1
-  armorMod: 4
+  armorMod: 2
   damageMod: 0
   miningMod: 0

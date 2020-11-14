@@ -1424,7 +1424,7 @@ PrefabInstance:
     - target: {fileID: 6336247514756302461, guid: 81850f72d60e728499125b10854ebea0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.1
+      value: -20.11
       objectReference: {fileID: 0}
     - target: {fileID: 6336247514756302461, guid: 81850f72d60e728499125b10854ebea0,
         type: 3}
@@ -1650,9 +1650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d22e05d6b3594439b744d4203a4083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xOffSet: 0
-  yOffSet: 0
-  zOffSet: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1781,7 +1778,7 @@ PrefabInstance:
     - target: {fileID: 6336247514756302461, guid: 81850f72d60e728499125b10854ebea0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.898613
+      value: 28.322
       objectReference: {fileID: 0}
     - target: {fileID: 6336247514756302461, guid: 81850f72d60e728499125b10854ebea0,
         type: 3}
@@ -1972,7 +1969,7 @@ PrefabInstance:
     - target: {fileID: 898159214672927364, guid: ca73e561605b2ac43bf465bf0dcd1606,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.98
+      value: -0.16
       objectReference: {fileID: 0}
     - target: {fileID: 898159214672927364, guid: ca73e561605b2ac43bf465bf0dcd1606,
         type: 3}
@@ -1982,7 +1979,7 @@ PrefabInstance:
     - target: {fileID: 898159214672927364, guid: ca73e561605b2ac43bf465bf0dcd1606,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.73
+      value: 53.87
       objectReference: {fileID: 0}
     - target: {fileID: 898159214672927364, guid: ca73e561605b2ac43bf465bf0dcd1606,
         type: 3}
@@ -2391,6 +2388,7 @@ MonoBehaviour:
   dayPanel: {fileID: 1596076621}
   losePanel: {fileID: 0}
   winPanel: {fileID: 0}
+  showGold: {fileID: 0}
   gold: 0
   playerDebt: 1000
   currentDay: 0
@@ -2954,6 +2952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBoy
       objectReference: {fileID: 0}
+    - target: {fileID: 8118767458644152607, guid: 16462602da926064d933595342c5f458,
+        type: 3}
+      propertyPath: attackSpeed.baseValue
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16462602da926064d933595342c5f458, type: 3}
 --- !u!1001 &4341372591852854863
@@ -3417,7 +3420,7 @@ PrefabInstance:
     - target: {fileID: 3061097632912434254, guid: 925fd65b038a23043ba6270c4933ca2e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.258614
+      value: 9.36
       objectReference: {fileID: 0}
     - target: {fileID: 3061097632912434254, guid: 925fd65b038a23043ba6270c4933ca2e,
         type: 3}

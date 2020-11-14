@@ -575,7 +575,7 @@ MonoBehaviour:
   armor:
     baseValue: 0
   damage:
-    baseValue: 5
+    baseValue: 8
   attackSpeed:
     baseValue: 1
   miningRate:

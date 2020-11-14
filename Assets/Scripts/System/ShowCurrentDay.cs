@@ -7,7 +7,6 @@ public class ShowCurrentDay : MonoBehaviour
 {
     public Text day;
     Image image;
-    PlayerManager pm;
     public float opacity;
     float opacityDrop = 1f;
     float maxOpacity = 1;
@@ -15,8 +14,6 @@ public class ShowCurrentDay : MonoBehaviour
     {
         image = GetComponent<Image>();
         day = GetComponentInChildren<Text>();
-        pm = PlayerManager.instance;
-        pm.onDayChangeCallback += ShowDay;
     }
     IEnumerator ShowDayEvent()
     {

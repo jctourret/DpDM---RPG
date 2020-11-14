@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0
-  mineral: {fileID: 4375900796282801182, guid: 2148dfaf506333a4f909d4da9b9bf68d, type: 3}
+  mineral: {fileID: 11400000, guid: a4516c9745d63b54c91102ebc3e02fce, type: 2}
 --- !u!136 &1100861533615776427
 CapsuleCollider:
   m_ObjectHideFlags: 0

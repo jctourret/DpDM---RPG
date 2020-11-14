@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new List<string>();
     }
+    
     public void StartDialogue(DialogueTrigger trigger) 
     {
         dialoguePanel.SetActive(!dialoguePanel.activeSelf);

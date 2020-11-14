@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8540067479868923275}
-  - component: {fileID: 8540067479868923274}
+  - component: {fileID: 5468365378139584632}
+  - component: {fileID: 1630460565}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -31,7 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8540067479868923274
+--- !u!114 &5468365378139584632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8540067479868923277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395b6922a6e9e1544a45e59a31223b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1630460565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,45 +57,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: Pain
+    clip: {fileID: 8300000, guid: 7416c9b241cb32f408838d91ffe214af, type: 3}
+    volume: 1
+    pitch: 0.52
+    loop: 1
+    OnAwake: 1
+    source: {fileID: 0}
   - name: Victory
     clip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
-    volume: 0.7
-    pitch: 0
+    volume: 1
+    pitch: 0.38
     loop: 0
-    source: {fileID: 0}
-  - name: Attack
-    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-    volume: 0.7
-    pitch: 0
-    loop: 0
-    source: {fileID: 0}
-  - name: Daypass
-    clip: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
-    volume: 0.7
-    pitch: 0
-    loop: 0
-    source: {fileID: 0}
-  - name: Dungeon
-    clip: {fileID: 8300000, guid: 10546d9649879d14e8277d84c34d122e, type: 3}
-    volume: 0.4
-    pitch: 0
-    loop: 1
+    OnAwake: 0
     source: {fileID: 0}
   - name: Town
     clip: {fileID: 8300000, guid: 45400638a56be7a4ea9c7e920d8410b6, type: 3}
-    volume: 0.4
-    pitch: 0.1
+    volume: 1
+    pitch: 0.22
     loop: 1
+    OnAwake: 1
+    source: {fileID: 0}
+  - name: Dungeon
+    clip: {fileID: 8300000, guid: 10546d9649879d14e8277d84c34d122e, type: 3}
+    volume: 1
+    pitch: 0.26
+    loop: 0
+    OnAwake: 0
+    source: {fileID: 0}
+  - name: Attack
+    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    volume: 0
+    pitch: 0.24
+    loop: 0
+    OnAwake: 0
     source: {fileID: 0}
   - name: Breath
     clip: {fileID: 8300000, guid: af6edb08e1f686041a968120f681aff9, type: 3}
-    volume: 0.7
-    pitch: 0
+    volume: 0
+    pitch: 0.61
     loop: 0
+    OnAwake: 0
     source: {fileID: 0}
-  - name: Pain
-    clip: {fileID: 8300000, guid: 7416c9b241cb32f408838d91ffe214af, type: 3}
-    volume: 0.7
-    pitch: 0.6
+  - name: Daypass
+    clip: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
+    volume: 1
+    pitch: 0.46
     loop: 0
+    OnAwake: 0
     source: {fileID: 0}

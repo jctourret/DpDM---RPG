@@ -1263,7 +1263,7 @@ MonoBehaviour:
   damage:
     baseValue: 10
   attackSpeed:
-    baseValue: 2
+    baseValue: 1
   miningRate:
     baseValue: 10
 --- !u!54 &8118767458644152601

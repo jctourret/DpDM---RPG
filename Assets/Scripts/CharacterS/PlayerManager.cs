@@ -15,17 +15,17 @@ public class PlayerManager : MonoBehaviour
     public OnEquipmentChange onEquipmentChangeCallback;
     public delegate void OnGoldChange();
     public OnGoldChange onGoldChangeCallback;
-    public delegate void OnDayChange();
-    public OnDayChange onDayChangeCallback;
     public delegate void OnWeekEnd();
     public OnWeekEnd onWeekEndCallback;
 
     Inventory inventory;
 
     public GameObject player;
+    PlayerStats stats;
     public ShowCurrentDay dayPanel;
     public GameOverLose losePanel;
     public GameOverWin winPanel;
+    public ShowGold showGold;
     public float gold;
     public int playerDebt = 1000;
     public int currentDay = 0;
@@ -43,10 +43,12 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         currentScene = SceneManager.GetActiveScene().name;
+        stats = player.GetComponent<PlayerStats>();
         inventory = Inventory.instance;
         int equipSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[equipSlots];
         equipmentSlots = equipGrid.GetComponentsInChildren<InventorySlot>();
+        showGold.updateGold();
         DontDestroyOnLoad(gameObject);
     }
     public void Update()
@@ -57,8 +59,9 @@ public class PlayerManager : MonoBehaviour
             currentScene = SceneManager.GetActiveScene().name;
             if (currentScene == "Town")
             {
-                AudioManager.instance.Play("Town");
+                FindObjectOfType<AudioManager>().Play("Town");
                 AudioManager.instance.Play("Daypass");
+                stats.currentHealth = stats.maxHealth;
                 currentDay += 1;
                 dayPanel.ShowDay();
                 if (currentDay > weekLenght)
@@ -80,6 +83,10 @@ public class PlayerManager : MonoBehaviour
             {
                 AudioManager.instance.Play("Dungeon");
             }
+            else
+            {
+                AudioManager.instance.Stop("Dungeon");
+            }
         }
     }
     public void resetGame()
@@ -97,6 +104,7 @@ public class PlayerManager : MonoBehaviour
     public void KillPlayer()
     {
         AudioManager.instance.Play("Death");
+        gold = 0f;
         SceneManager.LoadScene("Town");
         currentDay += 1;
     }
