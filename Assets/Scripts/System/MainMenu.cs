@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -9,12 +10,17 @@ public class MainMenu : MonoBehaviour
 {
     public bool connectedToGooglePlay;
     public bool connectedToFacebook;
+
+    Text friends;
+
     private void Awake()
     {
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
-
-        FB.Init(SetInit,OnHideUnity);
+        if (!FB.IsInitialized)
+        {
+            FB.Init(SetInit, OnHideUnity);
+        }
     }
     private void Start()
     {
@@ -26,6 +32,7 @@ public class MainMenu : MonoBehaviour
         if (FB.IsLoggedIn)
         {
             Debug.Log("Login successful");
+            FB.ActivateApp();
         }
         else
         {
@@ -38,6 +45,7 @@ public class MainMenu : MonoBehaviour
         if (gameShown)
         {
             Time.timeScale = 1;
+            FB.ActivateApp();
         }
         else
         {
@@ -49,7 +57,35 @@ public class MainMenu : MonoBehaviour
     {
         List<string> permissions = new List<string>();
         permissions.Add("public_profile");
+        permissions.Add("email");
+        permissions.Add("user_friends");
         FB.LogInWithReadPermissions(permissions,AuthCallResult);
+    }
+
+    public void FbLogout()
+    {
+        FB.LogOut();
+    }
+
+    public void FacebookGameRequest()
+    {
+        FB.AppRequest("Hey! Come and play this awesome game!",title: "Blood Oath");
+    }
+
+    public void GetFriendsPlayingGame()
+    {
+        string query = "/me/friends";
+        FB.API(query, HttpMethod.GET, result =>
+        {
+            var dictionary = (Dictionary<string, object>)Facebook.MiniJSON.Json.Deserialize(result.RawResult);
+            var friendlist = (List<object>)dictionary["data"];
+            friends.text = string.Empty;
+            foreach (var dict in friendlist)
+            {
+                friends.text += ((Dictionary<string, object>)dict)["name"];
+            }
+        }
+        );
     }
 
     void AuthCallResult(ILoginResult result)
