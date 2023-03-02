@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public Animator playerAnim;
     Interactable interObj;
-    string currentScene;
     public bool interacting;
     public float runningSpeed = 5f;
     public float interactionRadius = 2.2f;
@@ -47,21 +46,15 @@ public class PlayerController : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_EDITOR
         z = Input.GetAxis("Vertical");
         x = Input.GetAxis("Horizontal");
-        if (x != 0 || z != 0)
-        {
-            if (z > 0)
-            {
-                playerAnim.SetBool("walkingBackward", false);
-                playerAnim.SetBool("walkingForward", true);
-            }
-            else
-            {
-                playerAnim.SetBool("walkingForward", false);
-                playerAnim.SetBool("walkingBackward", true);
-            }
-        }
-        transform.Translate(Vector3.forward * z * Time.deltaTime * runningSpeed);
-        transform.Translate(Vector3.right * x * Time.deltaTime * runningSpeed);
+
+        Vector3 move = transform.forward * z + transform.right * x;
+
+        playerAnim.SetFloat("XSpeed", x);
+        playerAnim.SetFloat("YSpeed", z);
+        playerAnim.SetFloat("Magnitude", move.magnitude);
+
+
+        transform.Translate(move* Time.deltaTime * runningSpeed);
         
         if (Input.GetMouseButtonDown(0)&&!isInShop)
         {
@@ -88,26 +81,16 @@ public class PlayerController : MonoBehaviour
         }
 #endif
 #if UNITY_ANDROID
-        transform.Translate(Vector3.forward * joystick.Vertical * Time.deltaTime * runningSpeed);
-        transform.Translate(Vector3.right * joystick.Horizontal * Time.deltaTime * runningSpeed);
-        if (joystick.Horizontal != 0 || joystick.Vertical != 0)
-        {
-            if (joystick.Vertical > 0)
-            {
-                playerAnim.SetBool("walkingBackward", false);
-                playerAnim.SetBool("walkingForward", true);
-            }
-            else
-            {
-                playerAnim.SetBool("walkingForward", false);
-                playerAnim.SetBool("walkingBackward", true);
-            }
-        }
-        else
-        {
-            playerAnim.SetBool("walkingForward", false);
-            playerAnim.SetBool("walkingBackward", false);
-        }
+
+        Vector3 joystickMove = transform.forward * joystick.Vertical + transform.right * joystick.Horizontal;
+
+        playerAnim.SetFloat("XSpeed", joystick.Horizontal);
+        playerAnim.SetFloat("YSpeed", joystick.Vertical);
+
+        playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
+
+        transform.Translate(joystickMove * Time.deltaTime * runningSpeed);
+
         if (joybutton.pressed)
         {
             if (!interacting)

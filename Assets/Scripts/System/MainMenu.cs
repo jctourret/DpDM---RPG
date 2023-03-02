@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -13,6 +14,7 @@ public class MainMenu : MonoBehaviour
 
     Text friends;
 
+    TextMeshProUGUI friendsText;
     private void Awake()
     {
         PlayGamesPlatform.DebugLogEnabled = true;
@@ -79,15 +81,27 @@ public class MainMenu : MonoBehaviour
         {
             var dictionary = (Dictionary<string, object>)Facebook.MiniJSON.Json.Deserialize(result.RawResult);
             var friendlist = (List<object>)dictionary["data"];
-            friends.text = string.Empty;
+            friendsText.text = string.Empty;
             foreach (var dict in friendlist)
             {
-                friends.text += ((Dictionary<string, object>)dict)["name"];
+                friendsText.text += ((Dictionary<string, object>)dict)["name"];
             }
         }
         );
     }
-
+    public void FBShareFeed()
+    {
+        string url = "https://play.google.com/store/apps/details?id=com.CachuflitoGamesForever.BloodDebt";
+        FB.ShareLink(new System.Uri(url), "I just finished Blood Oath!", "Here, why don't you check it out?", null, ShareCallback);
+    }
+    private static void ShareCallback(IShareResult result)
+    {
+        if (result.Error != null)
+        {
+            Debug.LogError(result.Error);
+            return;
+        }
+    }
     void AuthCallResult(ILoginResult result)
     {
         if(result.Error != null)

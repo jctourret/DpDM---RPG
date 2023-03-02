@@ -39,8 +39,8 @@ public class GameOver : MonoBehaviour
     }
     public void FBShareFeed()
     {
-        string url = "https://makto.itch.io/";
-        FB.ShareLink(new System.Uri(url), "I just finished Blood Oath!", "Here are some more games from the Dev.", null, ShareCallback);
+        string url = "https://play.google.com/store/apps/details?id=com.CachuflitoGamesForever.BloodDebt";
+        FB.ShareLink(new System.Uri(url), "I just finished Blood Oath!", "Here, why don't you check it out?", null, ShareCallback);
     }
 
     private static void ShareCallback(IShareResult result)
