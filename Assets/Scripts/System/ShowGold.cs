@@ -1,17 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ShowGold : MonoBehaviour
 {
     Text gold;
-    void Start()
+    void Awake()
     {
         gold = GetComponent<Text>();
+        int a = 1;
     }
     public void updateGold()
     {
+        if(gold == null)
+        {
+            gold = GetComponent<Text>();
+        }
         gold.text = PlayerManager.instance.gold.ToString();
     }
 }

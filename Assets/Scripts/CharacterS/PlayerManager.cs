@@ -52,12 +52,13 @@ public class PlayerManager : MonoBehaviour
         currentEquipment = new Equipment[equipSlots];
         equipmentSlots = equipGrid.GetComponentsInChildren<InventorySlot>();
         DontDestroyOnLoad(gameObject);
+        instance.showGold.updateGold();
     }
     public void Update()
     {
         if (currentScene != SceneManager.GetActiveScene().name)
         {
-            PlayerController.instance.findControllers();
+            PlayerController.instance.SetToSpawnPoint();
             currentScene = SceneManager.GetActiveScene().name;
             if (currentScene == "Town")
             {

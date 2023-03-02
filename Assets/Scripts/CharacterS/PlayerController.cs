@@ -18,10 +18,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float jumpHeight = 1.0f;
+    private bool noFallFirstFrame;
     private float gravityValue = -9.81f;
 
-    public Transform camera;
+    public Transform cam;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
@@ -41,13 +41,18 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         DontDestroyOnLoad(gameObject);
     }
-    public void findControllers()
+
+    public void SetToSpawnPoint()
     {
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("Spawn");
         if (spawnPoint != null)
         {
             transform.position = spawnPoint.transform.position;
         }
+        noFallFirstFrame = true;
+    }
+    public void findControllers()
+    {
         joystick = FindObjectOfType<Joystick>();
         joybutton = FindObjectOfType<Joybutton>();
     }
@@ -75,9 +80,9 @@ public class PlayerController : MonoBehaviour
 
         if(move.magnitude >= 0.1f)
         {
-            targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
-            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
@@ -87,8 +92,15 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir.normalized * Time.deltaTime * runningSpeed);
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        if (!noFallFirstFrame)
+        {
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
+        else
+        {
+            noFallFirstFrame = false;
+        }
 
         if (Input.GetMouseButtonDown(0)&&!isInShop)
         {
@@ -123,7 +135,7 @@ public class PlayerController : MonoBehaviour
         //
         //playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
 
-        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
 
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
