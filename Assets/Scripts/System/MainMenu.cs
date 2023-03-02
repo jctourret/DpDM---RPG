@@ -82,6 +82,7 @@ public class MainMenu : MonoBehaviour
             var dictionary = (Dictionary<string, object>)Facebook.MiniJSON.Json.Deserialize(result.RawResult);
             var friendlist = (List<object>)dictionary["data"];
             friendsText.text = string.Empty;
+            friendsText.text = "Friends playing: ";
             foreach (var dict in friendlist)
             {
                 friendsText.text += ((Dictionary<string, object>)dict)["name"];
