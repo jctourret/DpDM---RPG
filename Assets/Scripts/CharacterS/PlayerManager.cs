@@ -51,7 +51,6 @@ public class PlayerManager : MonoBehaviour
         int equipSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[equipSlots];
         equipmentSlots = equipGrid.GetComponentsInChildren<InventorySlot>();
-        showGold.updateGold();
         DontDestroyOnLoad(gameObject);
     }
     public void Update()

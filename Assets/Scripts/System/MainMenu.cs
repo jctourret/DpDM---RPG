@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
 
     Text friends;
 
-    TextMeshProUGUI friendsText;
+    public TextMeshProUGUI friendsText;
     private void Awake()
     {
         PlayGamesPlatform.DebugLogEnabled = true;

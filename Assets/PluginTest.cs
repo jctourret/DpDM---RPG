@@ -12,8 +12,6 @@ public class PluginTest : MonoBehaviour
     {
         javaClass = new AndroidJavaObject("com.cachuflitogamesforever.mylibrary.PluginClass");
     }
-
-
     public void AddFive()
     {
         int number = javaClass.Call<int>("AddFiveToInteger", counter);

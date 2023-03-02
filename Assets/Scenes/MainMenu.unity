@@ -1188,7 +1188,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 682217942}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897965182}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: FbLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &682217942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3958,6 +3970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedToGooglePlay: 0
   connectedToFacebook: 0
+  friendsText: {fileID: 0}
 --- !u!1 &1484725135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5280,7 +5293,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1702202054}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897965182}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: FacebookGameRequest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1702202054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5549,6 +5574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedToGooglePlay: 0
   connectedToFacebook: 0
+  friendsText: {fileID: 929073997}
 --- !u!1 &1901576818
 GameObject:
   m_ObjectHideFlags: 0
@@ -5837,7 +5863,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1985172815}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1897965182}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: GetFriendsPlayingGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1985172815
 MonoBehaviour:
   m_ObjectHideFlags: 0

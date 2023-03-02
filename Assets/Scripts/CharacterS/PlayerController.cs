@@ -9,10 +9,16 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnim;
     Interactable interObj;
     public bool interacting;
-    public float runningSpeed = 5f;
     public float interactionRadius = 2.2f;
-    public float z;
-    public float x;
+
+    public float runningSpeed = 5f;
+    float z;
+    float x;
+
+    public Transform camera;
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
+
 #if UNITY_STANDALONE || UNITY_EDITOR
     public bool isInShop=false;
 #endif
@@ -43,6 +49,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        float angle;
 #if UNITY_STANDALONE || UNITY_EDITOR
         z = Input.GetAxis("Vertical");
         x = Input.GetAxis("Horizontal");
@@ -53,6 +60,9 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetFloat("YSpeed", z);
         playerAnim.SetFloat("Magnitude", move.magnitude);
 
+        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         transform.Translate(move* Time.deltaTime * runningSpeed);
         
@@ -88,6 +98,10 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetFloat("YSpeed", joystick.Vertical);
 
         playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
+
+        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         transform.Translate(joystickMove * Time.deltaTime * runningSpeed);
 

@@ -1555,6 +1555,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 8118767458644152605, guid: 16462602da926064d933595342c5f458,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 522811755}
     - target: {fileID: 8118767458644152606, guid: 16462602da926064d933595342c5f458,
         type: 3}
       propertyPath: m_Name
@@ -5560,7 +5565,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1655844, y: 1}
+    m_SensorSize: {x: 1.6886503, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5952,7 +5957,7 @@ MonoBehaviour:
   currentScene: 
   player: {fileID: 261880362}
   dayPanel: {fileID: 1372882760165527607}
-  GameOverPanel: {fileID: 0}
+  GameOverPanel: {fileID: 2713530536475414487}
   showGold: {fileID: 1465764607}
   gold: 1100
   playerDebt: 1000
