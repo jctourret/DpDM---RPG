@@ -20,7 +20,7 @@ public class GameOver : MonoBehaviour
     {
         yield return new WaitForSeconds(screenTime);
         gameObject.SetActive(!gameObject.activeSelf);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync("MainMenu");
     }
     public void ShowLoss()
     {
@@ -54,6 +54,6 @@ public class GameOver : MonoBehaviour
     public void BackToMenu()
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 }

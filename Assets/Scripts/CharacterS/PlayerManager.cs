@@ -137,7 +137,7 @@ public class PlayerManager : MonoBehaviour
     {
         AudioManager.instance.Play("Death");
         gold = 0f;
-        SceneManager.LoadScene("Town");
+        SceneManager.LoadSceneAsync("Town");
         currentDay += 1;
     }
 
