@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
         instance = this;
-        findControllers();
         controller = GetComponent<CharacterController>();
         playerAnim = GetComponent<Animator>();
         DontDestroyOnLoad(gameObject);
@@ -50,11 +49,6 @@ public class PlayerController : MonoBehaviour
             transform.position = spawnPoint.transform.position;
         }
         noFallFirstFrame = true;
-    }
-    public void findControllers()
-    {
-        joystick = FindObjectOfType<Joystick>();
-        joybutton = FindObjectOfType<Joybutton>();
     }
     void Update()
     {
