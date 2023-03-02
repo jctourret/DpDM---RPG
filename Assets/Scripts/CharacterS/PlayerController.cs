@@ -3,9 +3,10 @@
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
+
+    CharacterController controller;
     public Joystick joystick;
     public Joybutton joybutton;
-    public Rigidbody rb;
     public Animator playerAnim;
     Interactable interObj;
     public bool interacting;
@@ -14,6 +15,11 @@ public class PlayerController : MonoBehaviour
     public float runningSpeed = 5f;
     float z;
     float x;
+
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    private float jumpHeight = 1.0f;
+    private float gravityValue = -9.81f;
 
     public Transform camera;
     public float turnSmoothTime = 0.1f;
@@ -31,8 +37,8 @@ public class PlayerController : MonoBehaviour
         }
         instance = this;
         findControllers();
+        controller = GetComponent<CharacterController>();
         playerAnim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
         DontDestroyOnLoad(gameObject);
     }
     public void findControllers()
@@ -42,30 +48,48 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawnPoint.transform.position;
         }
-//#if UNITY_ANDROID
         joystick = FindObjectOfType<Joystick>();
         joybutton = FindObjectOfType<Joybutton>();
-//#endif
     }
     void Update()
     {
         float angle;
+        float targetAngle;
+
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
 #if UNITY_STANDALONE || UNITY_EDITOR
         z = Input.GetAxis("Vertical");
         x = Input.GetAxis("Horizontal");
 
-        Vector3 move = transform.forward * z + transform.right * x;
+        Vector3 move = new Vector3(x,0,z).normalized;
 
-        playerAnim.SetFloat("XSpeed", x);
-        playerAnim.SetFloat("YSpeed", z);
+        playerAnim.SetFloat("XSpeed", move.x);
+        playerAnim.SetFloat("YSpeed", move.z);
         playerAnim.SetFloat("Magnitude", move.magnitude);
 
-        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
 
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        if(move.magnitude >= 0.1f)
+        {
+            targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
 
-        transform.Translate(move* Time.deltaTime * runningSpeed);
-        
+            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0.0f,targetAngle,0.0f)*Vector3.forward;
+
+
+            controller.Move(moveDir.normalized * Time.deltaTime * runningSpeed);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+
         if (Input.GetMouseButtonDown(0)&&!isInShop)
         {
             if (!interacting)
@@ -94,10 +118,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 joystickMove = transform.forward * joystick.Vertical + transform.right * joystick.Horizontal;
 
-        playerAnim.SetFloat("XSpeed", joystick.Horizontal);
-        playerAnim.SetFloat("YSpeed", joystick.Vertical);
-
-        playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
+        //playerAnim.SetFloat("XSpeed", joystick.Horizontal);
+        //playerAnim.SetFloat("YSpeed", joystick.Vertical);
+        //
+        //playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
 
         angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, camera.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
 
@@ -129,5 +153,11 @@ public class PlayerController : MonoBehaviour
             interacting = false;
         }
 #endif
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position,transform.forward * 3,Color.red);
+        Debug.DrawRay(transform.position, transform.right * 3,Color.yellow);
     }
 }
