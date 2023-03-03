@@ -122,18 +122,35 @@ public class PlayerController : MonoBehaviour
 #endif
 #if UNITY_ANDROID
 
-        Vector3 joystickMove = transform.forward * joystick.Vertical + transform.right * joystick.Horizontal;
+        Vector3 joystickMove = new Vector3(joystick.Horizontal,0.0f, joystick.Vertical);
 
-        //playerAnim.SetFloat("XSpeed", joystick.Horizontal);
-        //playerAnim.SetFloat("YSpeed", joystick.Vertical);
-        //
-        //playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
+        playerAnim.SetFloat("XSpeed", joystick.Horizontal);
+        playerAnim.SetFloat("YSpeed", joystick.Vertical);
+        
+        playerAnim.SetFloat("Magnitude", joystickMove.magnitude);
 
-        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+        if (joystickMove.magnitude >= 0.1f)
+        {
+            targetAngle = Mathf.Atan2(joystickMove.x, joystickMove.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
 
-        transform.Translate(joystickMove * Time.deltaTime * runningSpeed);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
+
+            controller.Move(moveDir.normalized * Time.deltaTime * runningSpeed);
+        }
+
+        if (!noFallFirstFrame)
+        {
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
+        else
+        {
+            noFallFirstFrame = false;
+        }
 
         if (joybutton.pressed)
         {

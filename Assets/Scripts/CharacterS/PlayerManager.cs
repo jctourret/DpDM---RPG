@@ -56,6 +56,10 @@ public class PlayerManager : MonoBehaviour
     }
     public void Update()
     {
+        if(PlayerController.instance.transform.position.y < -5.0f)
+        {
+            PlayerController.instance.SetToSpawnPoint();
+        }
         if (currentScene != SceneManager.GetActiveScene().name)
         {
             PlayerController.instance.SetToSpawnPoint();
